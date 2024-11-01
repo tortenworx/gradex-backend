@@ -8,7 +8,7 @@ export type CredentialDocument = HydratedDocument<Credential>;
 @Schema()
 export class Credential {
   @Prop({ required: true })
-  email: string;
+  user_name: string;
 
   @Prop({ required: true })
   salted_password: string;
