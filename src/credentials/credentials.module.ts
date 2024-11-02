@@ -14,5 +14,6 @@ import { User, UserSchema } from 'src/schemas/user.schema';
   ],
   controllers: [CredentialsController],
   providers: [CredentialsService],
+  exports: [CredentialsService],
 })
 export class CredentialsModule {}
