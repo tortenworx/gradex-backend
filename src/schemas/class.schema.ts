@@ -1,3 +1,8 @@
+/**
+ * ? This file is unused due to the change of the design in the system,
+ * ? see https://github.com/tortenworx/gradex-backend/issues/1 to learn more.
+ */
+
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
 import { User } from './user.schema';

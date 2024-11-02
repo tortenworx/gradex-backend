@@ -21,6 +21,8 @@ export class Subject {
   description: string;
   @Prop()
   links: [SubjectLinks];
+  @Prop({ type: mongoose.Schema.ObjectId, ref: User })
+  students: [User];
 }
 
 export const SubjectSchema = SchemaFactory.createForClass(Subject);
