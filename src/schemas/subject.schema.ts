@@ -11,7 +11,7 @@ interface SubjectLinks {
 
 @Schema()
 export class Subject {
-  @Prop({ type: mongoose.Schema.ObjectId, ref: User })
+  @Prop({ type: mongoose.Schema.ObjectId, ref: 'User' })
   teacher: User;
   @Prop({ required: true })
   name: string;
@@ -21,7 +21,7 @@ export class Subject {
   description: string;
   @Prop()
   links: [SubjectLinks];
-  @Prop({ type: mongoose.Schema.ObjectId, ref: User })
+  @Prop({ type: mongoose.Schema.ObjectId, ref: 'User' })
   students: [User];
 }
 

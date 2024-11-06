@@ -5,6 +5,4 @@ import { ClassesService } from './classes.service';
 export class ClassesController {
   constructor(private readonly classesService: ClassesService) {}
 
-  @Post('create')
-  async createClass()
 }

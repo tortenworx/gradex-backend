@@ -9,6 +9,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { CredentialsModule } from './credentials/credentials.module';
 import { ClassesModule } from './classes/classes.module';
 import { GradesModule } from './grades/grades.module';
+import { SubjectsModule } from './subjects/subjects.module';
 
 @Module({
   imports: [
@@ -20,10 +21,15 @@ import { GradesModule } from './grades/grades.module';
       authMechanism: 'MONGODB-X509',
       authSource: '$external',
     }),
-    JwtModule.register({ secret: process.env.JWT_SECRET }),
+    JwtModule.register({
+      global: true,
+      secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: '3h' },
+    }),
     CredentialsModule,
     ClassesModule,
     GradesModule,
+    SubjectsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
