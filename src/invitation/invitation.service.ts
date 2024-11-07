@@ -18,7 +18,6 @@ export class InvitationService {
   ) {}
 
   async createInvitation(createInvitationDto: CreateInvitationDto) {
-    console.log(createInvitationDto);
     const user = await this.userModel.findById(createInvitationDto.userId);
     if (!user)
       throw new BadRequestException('No User was found with provided User ID');
