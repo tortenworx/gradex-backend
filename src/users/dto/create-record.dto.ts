@@ -1,4 +1,4 @@
-import { UserRecord } from './UserRecord.dto';
+import { UserRecord } from './user-record.dto';
 import { CreateCredentialDto } from 'src/credentials/dto/create-credential.dto';
 import { IntersectionType, OmitType, PartialType } from '@nestjs/mapped-types';
 

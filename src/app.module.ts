@@ -9,6 +9,8 @@ import { JwtModule } from '@nestjs/jwt';
 import { CredentialsModule } from './credentials/credentials.module';
 import { ClassesModule } from './classes/classes.module';
 import { GradesModule } from './grades/grades.module';
+import { SubjectsModule } from './subjects/subjects.module';
+import { InvitationModule } from './invitation/invitation.module';
 
 @Module({
   imports: [
@@ -16,14 +18,20 @@ import { GradesModule } from './grades/grades.module';
     UsersModule,
     MongooseModule.forRoot(process.env.DATABASE_URI, {
       tls: true,
-      tlsCertificateKeyFile: resolve('secrets', 'mongocert.pem'),
+      tlsCertificateKeyFile: '/etc/secrets/mongocert.pem',
       authMechanism: 'MONGODB-X509',
       authSource: '$external',
     }),
-    JwtModule.register({ secret: process.env.JWT_SECRET }),
+    JwtModule.register({
+      global: true,
+      secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: '3h' },
+    }),
     CredentialsModule,
     ClassesModule,
     GradesModule,
+    SubjectsModule,
+    InvitationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

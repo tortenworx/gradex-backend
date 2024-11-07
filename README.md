@@ -59,4 +59,4 @@ $ pnpm run cov
 
 ## License
 
-This project is licensed under the [GNU General Public License 3 (GPL-3.0)](LICENSE).
+This project is licensed under the [Mozilla Public License Version 2.0](LICENSE).

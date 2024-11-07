@@ -44,9 +44,8 @@ export class User {
 
   @Prop({ required: true, type: String, enum: Role, default: Role.USER })
   role: Role;
-
   @Prop({ type: mongoose.Schema.ObjectId, ref: 'Credential' })
-  credentials: Credential;
+  credential: Credential;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
