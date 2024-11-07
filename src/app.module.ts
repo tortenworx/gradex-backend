@@ -18,7 +18,8 @@ import { InvitationModule } from './invitation/invitation.module';
     UsersModule,
     MongooseModule.forRoot(process.env.DATABASE_URI, {
       tls: true,
-      tlsCertificateKeyFile: resolve('secrets', 'mongocert.pem'),
+      tlsCertificateKeyFile:
+        resolve('secrets', 'mongocert.pem') || '/etc/secrets/mongocert.pem',
       authMechanism: 'MONGODB-X509',
       authSource: '$external',
     }),
