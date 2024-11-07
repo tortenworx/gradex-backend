@@ -14,10 +14,21 @@ export class GradesService {
     @InjectModel(User.name) private userModel: Model<User>,
   ) {}
 
-  async createReport(createGradeReportDto: CreateGradeReportDto, originUserId: string) {
+  async createReport(
+    createGradeReportDto: CreateGradeReportDto,
+    originUserId: string,
+  ) {
     const originUser = await this.userModel.findById(originUserId);
-    const studentUser = await this.userModel.findById(createGradeReportDto.for_user)
-    if (!originUser) throw new NotFoundException('No user attached on the authorization header. Contact support.')
-    if (!studentUser) throw new NotFoundException('No student user found with attached ID. Check ID and try again.')
+    const studentUser = await this.userModel.findById(
+      createGradeReportDto.for_user,
+    );
+    if (!originUser)
+      throw new NotFoundException(
+        'No user attached on the authorization header. Contact support.',
+      );
+    if (!studentUser)
+      throw new NotFoundException(
+        'No student user found with attached ID. Check ID and try again.',
+      );
   }
 }

@@ -1,10 +1,10 @@
 import { IsMongoId, IsNotEmpty } from 'class-validator';
 
-export class AddUserToClassDto {
+export class AttachSubjectToClassDto {
   @IsMongoId()
   @IsNotEmpty()
-  user_id: string;
+  subject: string;
   @IsMongoId()
   @IsNotEmpty()
-  for_class: string;
+  class: string;
 }

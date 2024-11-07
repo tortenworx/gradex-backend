@@ -81,7 +81,6 @@ export class CredentialsService {
     const jwtToken = await this.jwtModule.signAsync({
       sub: userSearch.id,
       first_name: userSearch.first_name,
-      middle_name: userSearch.middle_name,
       last_name: userSearch.last_name,
       role: userSearch.role,
     });
@@ -97,6 +96,18 @@ export class CredentialsService {
   addMFA() {}
 
   removeMFA() {}
+
+  async getUserThruHeaders(user_id: string): Promise<User> {
+    const userObj = await this.userModel
+      .findById(user_id)
+      .select('-credential');
+    if (!userObj)
+      throw new NotFoundException(
+        'No user was found with provided ID. Contact Support.',
+      );
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    return userObj;
+  }
 
   async checkIfUsernameTaken(username: string): Promise<boolean> {
     const user = await this.credentialModel.findOne({ user_name: username });

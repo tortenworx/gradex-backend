@@ -1,8 +1,18 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Request,
+  UseGuards,
+} from '@nestjs/common';
 import { CredentialsService } from './credentials.service';
 import { CreateCredentialDto } from './dto/create-credential.dto';
 import { AuthenticateUserDto } from './dto/authenticate-user.dto';
 import { CredentialsGuard } from './credentials.guard';
+import { Roles } from './decorator/roles.decorator';
+import { User } from 'src/schemas/user.schema';
 
 @Controller('credentials')
 export class CredentialsController {
@@ -13,7 +23,6 @@ export class CredentialsController {
   ): Promise<object> {
     return this.credentialsService.create(createCredentialDto);
   }
-  @UseGuards(CredentialsGuard)
   @Get('username-taken/:username')
   async usernameTaken(@Param('username') username: string): Promise<boolean> {
     return await this.credentialsService.checkIfUsernameTaken(username);
@@ -23,5 +32,11 @@ export class CredentialsController {
     @Body() authenticateUserDto: AuthenticateUserDto,
   ): Promise<object> {
     return await this.credentialsService.authenticate(authenticateUserDto);
+  }
+  @Get('user')
+  @Roles(['USER', 'FACULTY', 'SUPERADMIN'])
+  @UseGuards(CredentialsGuard)
+  async getAuthenticatedUser(@Request() request): Promise<User> {
+    return this.credentialsService.getUserThruHeaders(request.user.sub);
   }
 }
