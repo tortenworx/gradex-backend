@@ -10,6 +10,7 @@ import { CredentialsModule } from './credentials/credentials.module';
 import { ClassesModule } from './classes/classes.module';
 import { GradesModule } from './grades/grades.module';
 import { SubjectsModule } from './subjects/subjects.module';
+import { InvitationModule } from './invitation/invitation.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { SubjectsModule } from './subjects/subjects.module';
     ClassesModule,
     GradesModule,
     SubjectsModule,
+    InvitationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

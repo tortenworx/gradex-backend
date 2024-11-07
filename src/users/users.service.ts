@@ -8,11 +8,13 @@ import { Model } from 'mongoose';
 import { User } from 'src/schemas/user.schema';
 import { NewUserDto } from './dto/create-record.dto';
 import { CredentialsService } from 'src/credentials/credentials.service';
+import { Credential } from 'src/schemas/credentials.schema';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectModel(User.name) private userModel: Model<User>,
+    @InjectModel(Credential.name) private credentialModel: Model<Credential>,
     private readonly credentialService: CredentialsService,
   ) {}
 
@@ -53,5 +55,12 @@ export class UsersService {
       return { user, credentials };
     }
     return user;
+  }
+  async deleteUser(id: string): Promise<[any, any]> {
+    const user = await this.userModel.findByIdAndDelete(id);
+    const userCredentials = await this.credentialModel.deleteOne({
+      _id: user.credential,
+    });
+    return [user, userCredentials];
   }
 }

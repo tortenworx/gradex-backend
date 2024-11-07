@@ -69,6 +69,7 @@ export class CredentialsService {
         first_name: userSearch.first_name,
         middle_name: userSearch.middle_name,
         last_name: userSearch.last_name,
+        role: userSearch.role,
       });
       return {
         access_token: jwtToken,
@@ -82,6 +83,7 @@ export class CredentialsService {
       first_name: userSearch.first_name,
       middle_name: userSearch.middle_name,
       last_name: userSearch.last_name,
+      role: userSearch.role,
     });
     return {
       access_token: jwtToken,

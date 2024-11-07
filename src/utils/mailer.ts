@@ -1,11 +1,14 @@
-import nodemailer from 'nodemailer';
-import hbs from 'nodemailer-express-handlebars';
+import * as nodemailer from 'nodemailer';
+import * as handlebars from 'handlebars';
+import { readFileSync } from 'fs';
+import { resolve } from 'path';
+import 'dotenv/config';
 
 const transport = nodemailer.createTransport({
-  host: 'mail.spacemail.com',
-  port: 465,
+  host: process.env.EMAIL_HOST,
+  port: process.env.EMAIL_PORT,
   secured: true,
-  user: {
+  auth: {
     user: process.env.EMAIL_USERNAME,
     pass: process.env.EMAIL_PASSWORD,
   },
@@ -17,17 +20,17 @@ export async function sendInvitation(
   invitation_url: string,
 ): Promise<void> {
   try {
-    transport.use('compile', hbs());
+    const templateFile = readFileSync(
+      resolve('.', 'src', 'utils', 'mailer', 'invitation.hbs'),
+    ).toString();
+    const template = handlebars.compile(templateFile);
+
     await transport.sendMail({
-      from: 'GradeX System <no-reply@olivarezcollegetagaytay.edu.ph>',
+      from: 'GradeX <galaxa@torten.xyz>',
       to: recipient,
-      subject: 'Complete your registration',
+      subject: '[GradeX] Complete your registration',
       text: `Good day! \n\n Your account with GradeX has been created. Please visit the link below to proceed \n\nInvitation Link:\n${invitation_url}`,
-      template: 'invitation',
-      context: {
-        first_name: name,
-        invitation_url,
-      },
+      html: template({ first_name: name, invitation_link: invitation_url }),
     });
   } catch (error) {
     throw new Error(error);

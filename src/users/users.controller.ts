@@ -1,10 +1,21 @@
-import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  UseGuards,
+  ValidationPipe,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { NewUserDto } from './dto/create-record.dto';
+import { CredentialsGuard } from 'src/credentials/credentials.guard';
+import { Roles } from 'src/credentials/decorator/roles.decorator';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
+
+  @Roles(['SUPERADMIN'])
+  @UseGuards(CredentialsGuard)
   @Post('/create')
   async newUser(@Body(ValidationPipe) newUserDto: NewUserDto): Promise<any> {
     try {
