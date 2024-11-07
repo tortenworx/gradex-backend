@@ -9,20 +9,20 @@ import mongoose, { HydratedDocument } from 'mongoose';
 import { User } from './user.schema';
 import { Subject } from './subject.schema';
 
-export type SubjectDocument = HydratedDocument<Subject>;
+export type ClassDocument = HydratedDocument<Subject>;
 
-interface ClassLinks {
+export interface ClassLinks {
   name: string;
   link: string;
 }
 
-enum Strand {
-  GAS,
-  STEM,
-  HUMMS,
-  ABM,
-  TVL_HE,
-  TVL_ICT,
+export enum Strand {
+  GAS = 'GAS',
+  STEM = 'STEM',
+  HUMMS = 'HUMMS',
+  ABM = 'ABM',
+  TVL_HE = 'TVL_HE',
+  TVL_ICT = 'TVL_ICT',
 }
 
 @Schema()
@@ -41,4 +41,4 @@ export class Class {
   students: [User];
 }
 
-export const SubjectSchema = SchemaFactory.createForClass(Subject);
+export const ClassSchema = SchemaFactory.createForClass(Class);

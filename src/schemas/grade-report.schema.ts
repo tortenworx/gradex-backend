@@ -3,10 +3,10 @@ import mongoose, { HydratedDocument } from 'mongoose';
 import { User } from './user.schema';
 import { Subject } from './subject.schema';
 
-export type SubjectDocument = HydratedDocument<Subject>;
+export type GradeReportDocument = HydratedDocument<Subject>;
 
 @Schema()
-export class Class {
+export class GradeReport {
   @Prop({ type: mongoose.Schema.ObjectId, ref: 'User' })
   for_user: User;
   @Prop({ type: Date, default: Date.now })
@@ -19,4 +19,4 @@ export class Class {
   created_by: User;
 }
 
-export const SubjectSchema = SchemaFactory.createForClass(Subject);
+export const GradeReportSchema = SchemaFactory.createForClass(GradeReport);
