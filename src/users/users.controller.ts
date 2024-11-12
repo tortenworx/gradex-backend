@@ -1,14 +1,16 @@
 import {
   Body,
   Controller,
+  Delete,
   Post,
   UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { NewUserDto } from './dto/create-record.dto';
-import { CredentialsGuard } from 'src/credentials/credentials.guard';
-import { Roles } from 'src/credentials/decorator/roles.decorator';
+import { CredentialsGuard } from '../credentials/credentials.guard';
+import { Roles } from '../credentials/decorator/roles.decorator';
+import { DeleteUserDto } from './dto/delete-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -33,5 +35,11 @@ export class UsersController {
         data: error,
       };
     }
+  }
+  @Roles(['SUPERADMIN'])
+  @UseGuards(CredentialsGuard)
+  @Delete('/delete')
+  async deleteUser(deleteUserDto: DeleteUserDto) {
+    return await this.usersService.deleteUser(deleteUserDto);
   }
 }

@@ -1,8 +1,8 @@
 import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { InvitationService } from './invitation.service';
 import { CreateInvitationDto } from './dto/create-invitation.dto';
-import { CredentialsGuard } from 'src/credentials/credentials.guard';
-import { Roles } from 'src/credentials/decorator/roles.decorator';
+import { CredentialsGuard } from '../credentials/credentials.guard';
+import { Roles } from '../credentials/decorator/roles.decorator';
 
 @Controller('invitation')
 export class InvitationController {

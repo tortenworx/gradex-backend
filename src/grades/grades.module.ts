@@ -2,12 +2,9 @@ import { Module } from '@nestjs/common';
 import { GradesService } from './grades.service';
 import { GradesController } from './grades.controller';
 import { MongooseModule } from '@nestjs/mongoose';
-import {
-  GradeReport,
-  GradeReportSchema,
-} from 'src/schemas/grade-report.schema';
-import { Subject, SubjectSchema } from 'src/schemas/subject.schema';
-import { User, UserSchema } from 'src/schemas/user.schema';
+import { GradeReport, GradeReportSchema } from '../schemas/grade-report.schema';
+import { Subject, SubjectSchema } from '../schemas/subject.schema';
+import { User, UserSchema } from '../schemas/user.schema';
 
 @Module({
   imports: [

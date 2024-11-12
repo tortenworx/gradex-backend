@@ -1,5 +1,5 @@
 import { UserRecord } from './user-record.dto';
-import { CreateCredentialDto } from 'src/credentials/dto/create-credential.dto';
+import { CreateCredentialDto } from '../../credentials/dto/create-credential.dto';
 import { IntersectionType, OmitType, PartialType } from '@nestjs/mapped-types';
 
 export class NewUserCredentialsDto extends OmitType(CreateCredentialDto, [

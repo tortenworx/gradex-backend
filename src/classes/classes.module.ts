@@ -3,8 +3,8 @@ import { ClassesService } from './classes.service';
 import { ClassesController } from './classes.controller';
 import { Subject, SubjectSchema } from '../schemas/subject.schema';
 import { MongooseModule } from '@nestjs/mongoose';
-import { Class, ClassSchema } from 'src/schemas/class.schema';
-import { User, UserSchema } from 'src/schemas/user.schema';
+import { Class, ClassSchema } from '../schemas/class.schema';
+import { User, UserSchema } from '../schemas/user.schema';
 
 @Module({
   imports: [

@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Class } from 'src/schemas/class.schema';
-import { Subject } from 'src/schemas/subject.schema';
-import { Role, User } from 'src/schemas/user.schema';
+import { Class } from '../schemas/class.schema';
+import { Subject } from '../schemas/subject.schema';
+import { Role, User } from '../schemas/user.schema';
 import { CreateClassDto } from './dto/create-class.dto';
 import { AttachSubjectToClassDto } from './dto/attach-subject.dto';
 import { AddUserToClassDto } from './dto/add-user-to-class.dto';

@@ -1,10 +1,10 @@
 import { Controller, Post, Put, UseGuards } from '@nestjs/common';
 import { ClassesService } from './classes.service';
-import { Roles } from 'src/credentials/decorator/roles.decorator';
-import { CredentialsGuard } from 'src/credentials/credentials.guard';
+import { Roles } from '../credentials/decorator/roles.decorator';
+import { CredentialsGuard } from '../credentials/credentials.guard';
 import { CreateClassDto } from './dto/create-class.dto';
 import { AddUserToClassDto } from './dto/add-user-to-class.dto';
-import { Class } from 'src/schemas/class.schema';
+import { Class } from '../schemas/class.schema';
 import { AttachSubjectToClassDto } from './dto/attach-subject.dto';
 
 @Controller('classes')

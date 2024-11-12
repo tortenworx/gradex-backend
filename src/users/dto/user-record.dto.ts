@@ -6,7 +6,7 @@ import {
   IsString,
   Matches,
 } from 'class-validator';
-import { Gender, Role } from 'src/schemas/user.schema';
+import { Gender, Role } from '../../schemas/user.schema';
 
 export class UserRecord {
   @Matches(/^(\d{3}[S|C]|OCT)-\d{4,}\w?$/g, {

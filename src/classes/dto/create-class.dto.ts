@@ -5,7 +5,7 @@ import {
   IsNotEmpty,
   IsOptional,
 } from 'class-validator';
-import { ClassLinks, Strand } from 'src/schemas/class.schema';
+import { ClassLinks, Strand } from '../../schemas/class.schema';
 
 export class CreateClassDto {
   @IsMongoId()

@@ -7,13 +7,13 @@ import { JwtService } from '@nestjs/jwt';
 import { CreateInvitationDto } from './dto/create-invitation.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { User } from 'src/schemas/user.schema';
-import { sendInvitation } from 'src/utils/mailer';
-
+import { User } from '../schemas/user.schema';
+import { MailerService } from '@nestjs-modules/mailer';
 @Injectable()
 export class InvitationService {
   constructor(
     private jwtModule: JwtService,
+    private mailerService: MailerService,
     @InjectModel(User.name) private userModel: Model<User>,
   ) {}
 
@@ -33,11 +33,19 @@ export class InvitationService {
     );
     const invitation_url = 'http://localhost:8000/invitation/' + token;
     try {
-      await sendInvitation(
-        user.first_name,
-        createInvitationDto.reciepient_address,
-        invitation_url,
-      );
+      this.mailerService.sendMail({
+        to: createInvitationDto.reciepient_address,
+        from: 'GradeX <gradex-noreply@mail-distribution.torten.xyz>',
+        subject: '[GradeX] Finish your account',
+        text:
+          'Your account is nearly ready, create your log-in credentials using this link: ' +
+          invitation_url,
+        template: 'invitation',
+        context: {
+          first_name: user.first_name,
+          invitation_link: invitation_url,
+        },
+      });
     } catch (error) {
       console.error(error);
       throw new InternalServerErrorException(

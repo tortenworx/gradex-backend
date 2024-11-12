@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { GradeReport } from 'src/schemas/grade-report.schema';
-import { Subject } from 'src/schemas/subject.schema';
-import { User } from 'src/schemas/user.schema';
+import { GradeReport } from '../schemas/grade-report.schema';
+import { Subject } from '../schemas/subject.schema';
+import { User } from '../schemas/user.schema';
 import { CreateGradeReportDto } from './dto/create-grade-report.dto';
 import { Model } from 'mongoose';
 

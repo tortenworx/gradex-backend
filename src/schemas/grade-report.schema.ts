@@ -5,18 +5,33 @@ import { Subject } from './subject.schema';
 
 export type GradeReportDocument = HydratedDocument<Subject>;
 
+enum REPORT_TYPE {
+  COLLEGE = 'COLLEGE',
+  SENIOR_HIGH = 'SHS',
+}
+
 @Schema()
 export class GradeReport {
-  @Prop({ type: mongoose.Schema.ObjectId, ref: 'User' })
-  for_user: User;
-  @Prop({ type: Date, default: Date.now })
-  created_at: Date;
-  @Prop({ type: Date, required: true })
-  viewable_until: Date;
-  @Prop({ type: mongoose.Schema.ObjectId, ref: 'Subject' })
-  grades: [Subject, number];
-  @Prop({ type: mongoose.Schema.ObjectId, ref: 'User' })
+  @Prop({ type: mongoose.Types.ObjectId, ref: 'Subject' })
+  subject: Subject;
+  @Prop({ type: mongoose.Types.ObjectId, ref: 'User' })
   created_by: User;
+  @Prop({ required: true })
+  semester: number;
+  @Prop({
+    required: true,
+    type: String,
+    enum: REPORT_TYPE,
+    default: REPORT_TYPE.COLLEGE,
+  })
+  type: REPORT_TYPE;
+  @Prop({ required: true })
+  records: [
+    {
+      user: User;
+      avg: number;
+    },
+  ];
 }
 
 export const GradeReportSchema = SchemaFactory.createForClass(GradeReport);

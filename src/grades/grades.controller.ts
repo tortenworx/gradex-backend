@@ -1,8 +1,8 @@
 import { Controller, Post, Request, UseGuards } from '@nestjs/common';
 import { GradesService } from './grades.service';
-import { Roles } from 'src/credentials/decorator/roles.decorator';
+import { Roles } from '../credentials/decorator/roles.decorator';
 import { CreateGradeReportDto } from './dto/create-grade-report.dto';
-import { CredentialsGuard } from 'src/credentials/credentials.guard';
+import { CredentialsGuard } from '../credentials/credentials.guard';
 
 @Controller('grades')
 export class GradesController {
