@@ -10,6 +10,12 @@ enum REPORT_TYPE {
   SENIOR_HIGH = 'SHS',
 }
 
+enum REPORT_STATUS {
+  EDITING = "EDITING",
+  PUBLISHED = "PUBLISHED",
+  REVIEWING = "REVIEWING"
+}
+
 @Schema()
 export class GradeReport {
   @Prop({ type: mongoose.Types.ObjectId, ref: 'Subject' })
@@ -18,6 +24,13 @@ export class GradeReport {
   created_by: User;
   @Prop({ required: true })
   semester: number;
+  @Prop({
+    required: true,
+    type: String,
+    enum: REPORT_STATUS,
+    default: REPORT_STATUS.EDITING,
+  })
+  status: string;
   @Prop({
     required: true,
     type: String,
