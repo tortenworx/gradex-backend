@@ -19,16 +19,23 @@ export class GradesService {
     originUserId: string,
   ) {
     const originUser = await this.userModel.findById(originUserId);
-    const studentUser = await this.userModel.findById(
-      createGradeReportDto.for_user,
-    );
     if (!originUser)
       throw new NotFoundException(
         'No user attached on the authorization header. Contact support.',
       );
-    if (!studentUser)
-      throw new NotFoundException(
-        'No student user found with attached ID. Check ID and try again.',
-      );
+    const report = new this.gradeReportModel();
+    report.created_by = originUser;
+    report.semester = createGradeReportDto.semester;
+    report.type = createGradeReportDto.type;
+    if (createGradeReportDto.status)
+      report.status = createGradeReportDto.status;
+    createGradeReportDto.grades.map(async (data) => {
+      const user = await this.userModel.findById(data.user);
+      report.records.push({
+        user,
+        avg: data.avg,
+      });
+    });
+    return report.save();
   }
 }

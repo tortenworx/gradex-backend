@@ -1,12 +1,30 @@
-import { IsArray, IsDate, IsMongoId, IsNotEmpty } from 'class-validator';
-import { Subject } from 'src/schemas/subject.schema';
-
+import {
+  IsArray,
+  IsEnum,
+  IsMongoId,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+} from 'class-validator';
+import { REPORT_STATUS, REPORT_TYPE } from '../../schemas/grade-report.schema';
 export class CreateGradeReportDto {
-  @IsNotEmpty()
   @IsMongoId()
-  for_user: string;
+  @IsNotEmpty()
+  subject: string;
+  @IsEnum(REPORT_TYPE)
+  @IsNotEmpty()
+  type: REPORT_TYPE;
+  @IsOptional()
+  @IsEnum(REPORT_STATUS)
+  status: REPORT_STATUS;
+  @IsNumber()
+  @IsNotEmpty()
+  semester: number;
   @IsArray()
-  grades: [Subject, number];
-  @IsDate()
-  viewable_until: Date;
+  grades: [
+    {
+      user: string;
+      avg: number;
+    },
+  ];
 }

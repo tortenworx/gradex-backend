@@ -5,15 +5,15 @@ import { Subject } from './subject.schema';
 
 export type GradeReportDocument = HydratedDocument<Subject>;
 
-enum REPORT_TYPE {
+export enum REPORT_TYPE {
   COLLEGE = 'COLLEGE',
   SENIOR_HIGH = 'SHS',
 }
 
-enum REPORT_STATUS {
-  EDITING = "EDITING",
-  PUBLISHED = "PUBLISHED",
-  REVIEWING = "REVIEWING"
+export enum REPORT_STATUS {
+  EDITING = 'EDITING',
+  PUBLISHED = 'PUBLISHED',
+  REVIEWING = 'REVIEWING',
 }
 
 @Schema()
