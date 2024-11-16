@@ -2,7 +2,9 @@ import {
   Body,
   Controller,
   Delete,
+  Get,
   Post,
+  Request,
   UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
@@ -41,5 +43,11 @@ export class UsersController {
   @Delete('/delete')
   async deleteUser(deleteUserDto: DeleteUserDto) {
     return await this.usersService.deleteUser(deleteUserDto);
+  }
+  @Roles(['SUPERADMIN'])
+  @UseGuards(CredentialsGuard)
+  @Get('/list')
+  async getUser(@Request() request) {
+    return this.usersService.getUsers(request.user.sub);
   }
 }

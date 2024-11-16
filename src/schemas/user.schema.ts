@@ -11,9 +11,9 @@ export enum Gender {
 }
 
 export enum Role {
-  USER,
-  FACULTY,
-  SUPERADMIN,
+  USER = 'USER',
+  FACULTY = 'FACULTY',
+  SUPERADMIN = 'SUPERADMIN',
 }
 
 @Schema()
