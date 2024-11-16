@@ -11,7 +11,6 @@ import { Model } from 'mongoose';
 import { User } from '../schemas/user.schema';
 import { MailerService } from '@nestjs-modules/mailer';
 import { ResendInvitationDto } from './dto/resend-invitation.dto';
-import { capitalCase } from 'change-case';
 @Injectable()
 export class InvitationService {
   constructor(
@@ -64,7 +63,7 @@ export class InvitationService {
       $and: [
         {
           id_number: resendInvitationDto.id_number,
-          last_name: capitalCase(resendInvitationDto.last_name),
+          last_name: resendInvitationDto.last_name,
         },
       ],
     });
